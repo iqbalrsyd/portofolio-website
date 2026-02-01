@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="none">
+  <rect width="256" height="256" fill="#512BD4"/>
+  <circle cx="80" cy="128" r="16" fill="white"/>
+  <text x="110" y="145" font-family="Arial, sans-serif" font-size="80" font-weight="bold" fill="white">.NET</text>
+</svg>
