@@ -21,11 +21,12 @@ services:
     container_name: portfolio-nginx
     restart: unless-stopped
     ports:
-      - "80:80"
-      - "443:443"
+      - "80:80"      # NAT forward: 32021 -> 80
+      - "443:443"    # NAT forward: 32022 -> 443
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
       - ./ssl:/etc/nginx/ssl:ro
+      - ./certbot-webroot:/var/www/certbot:ro
     depends_on:
       - portfolio
     networks:
