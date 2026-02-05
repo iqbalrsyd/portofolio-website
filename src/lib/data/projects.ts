@@ -26,23 +26,27 @@ Integrated observability readiness checks including health endpoints, service re
 	{
 		slug: 'event-driven-kafka',
 		color: '#000000',
-		description: `Designed an event-driven backend system using Apache Kafka for asynchronous message processing.
+		description: `Built event-driven backend system with Golang and Apache Kafka to process e-commerce transactions asynchronously across three microservices communicating via Kafka event streams.
 
-Implemented producer and consumer services to handle order processing workflows.
+Designed microservices architecture handling orders, payments, and inventory with parallel processing to eliminate API bottlenecks and improve scalability.
 
-Utilized Kafka topics, partitions, and consumer groups to improve system scalability and reliability.
+Implemented producer-consumer pattern with Kafka topics, partitions, and consumer groups achieving 1000+ orders/minute throughput with <50ms response time.
 
-Deployed complete Kafka infrastructure using Docker Compose for easy setup and management.`,
-		shortDescription: 'Event-driven order processing system with Kafka and Golang',
+Developed comprehensive testing suite using k6 (load, stress, spike tests) proving system stability under extended load with <0.1% error rate.
+
+Configured retry mechanisms and offset management for reliable message processing with database-per-service pattern ensuring data isolation.
+
+Deployed complete Kafka infrastructure using Docker Compose with PostgreSQL databases, health monitoring, and structured logging (Uber Zap) for observability.`,
+		shortDescription: 'Microservices architecture with Kafka achieving 1000+ orders/min throughput',
 		links: [],
 		logo: Assets.Kafka,
-		name: 'Event-Driven Order Processing System',
+		name: 'Event-Driven Transaction Processing System',
 		period: {
 			from: new Date(2024, 5, 1),
 			to: new Date(2024, 6, 30)
 		},
-		skills: getSkills('golang', 'kafka', 'docker'),
-		type: 'Backend System',
+		skills: getSkills('golang', 'kafka', 'docker', 'postgresql'),
+		type: 'Microservices Backend',
 	},
 	{
 		slug: 'devops-observability',
