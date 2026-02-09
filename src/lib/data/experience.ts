@@ -1,6 +1,7 @@
 import Assets from './assets';
 import { getSkills } from './skills';
 import { ContractType, type Experience } from './types';
+import brinsInternshipMd from './md/brins-internship.md?raw';
 
 const title = 'Experience';
 
@@ -8,13 +9,7 @@ const items: Array<Experience> = [
 	{
 		slug: 'brins-intern',
 		company: 'PT BRI Asuransi Indonesia (BRINS)',
-		description: `Developed backend REST APIs using C# (.NET) with ASP.NET Core by applying OOP and SOLID principles. 
-		
-Contributed to backend development using PHP (Lumen) for system monitoring applications.
-
-Implemented frontend features using Angular and TypeScript.
-
-Participated in UI/UX design using Figma.`,
+		description: brinsInternshipMd,
 		contract: ContractType.Internship,
 		type: 'Software Development',
 		location: 'South Jakarta',
