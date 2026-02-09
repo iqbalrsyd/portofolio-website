@@ -1,6 +1,7 @@
 import Assets from './assets';
 import { getSkills } from './skills';
 import type { Project } from './types';
+import eventDrivenKafkaMd from './md/event-driven-kafka.md?raw';
 
 const items: Array<Project> = [
 	{
@@ -26,17 +27,7 @@ Integrated observability readiness checks including health endpoints, service re
 	{
 		slug: 'event-driven-kafka',
 		color: '#000000',
-		description: `Built event-driven backend system with Golang and Apache Kafka to process e-commerce transactions asynchronously across three microservices communicating via Kafka event streams.
-
-Designed microservices architecture handling orders, payments, and inventory with parallel processing to eliminate API bottlenecks and improve scalability.
-
-Implemented producer-consumer pattern with Kafka topics, partitions, and consumer groups achieving 1000+ orders/minute throughput with <50ms response time.
-
-Developed comprehensive testing suite using k6 (load, stress, spike tests) proving system stability under extended load with <0.1% error rate.
-
-Configured retry mechanisms and offset management for reliable message processing with database-per-service pattern ensuring data isolation.
-
-Deployed complete Kafka infrastructure using Docker Compose with PostgreSQL databases, health monitoring, and structured logging (Uber Zap) for observability.`,
+		description: eventDrivenKafkaMd,
 		shortDescription: 'Microservices architecture with Kafka achieving 1000+ orders/min throughput',
 		links: [],
 		logo: Assets.Kafka,

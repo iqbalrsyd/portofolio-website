@@ -12,30 +12,20 @@ RUN npm install
 # Copy source code
 COPY . .
 
-# Build the application
+# Build the application (static files)
 RUN npm run build
 
-# Production stage
-FROM node:20-alpine AS runner
+# Production stage - Use Nginx for static files
+FROM nginx:alpine AS runner
 
-WORKDIR /app
+# Copy built static files
+COPY --from=builder /app/build /usr/share/nginx/html
 
-# Copy package files
-COPY package.json ./
+# Copy nginx config for SPA routing
+COPY nginx-app.conf /etc/nginx/conf.d/default.conf
 
-# Install production dependencies only
-RUN npm install --omit=dev
+# Expose port 80
+EXPOSE 80
 
-# Copy built application from builder
-COPY --from=builder /app/build ./build
-COPY --from=builder /app/package.json ./package.json
-
-# Expose port
-EXPOSE 3000
-
-# Set environment variables
-ENV NODE_ENV=production
-ENV PORT=3000
-
-# Start the application
-CMD ["node", "build"]
+# Start nginx
+CMD ["nginx", "-g", "daemon off;"]
