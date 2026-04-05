@@ -128,7 +128,7 @@
 		>
 			<Tooltip>
 				<TooltipTrigger>
-					<Icon icon={NavBarData.left.icon} />
+					<img src="/logo.png" alt="Logo" class="h-8 w-8 object-contain" />
 				</TooltipTrigger>
 				<TooltipContent side="bottom" class="lg:hidden">
 					{NavBarData.left.title}

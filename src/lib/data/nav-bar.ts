@@ -11,6 +11,7 @@ const items: Array<{
 	{ title: 'Projects', icon: 'i-carbon-cube', href: '#projects' },
 	{ title: 'Experience', icon: 'i-carbon-development', href: '#experience' },
 	{ title: 'Education', icon: 'i-carbon-education', href: '#education' },
+	{ title: 'Blog', icon: 'i-carbon-blog', href: '/blog' },
 	{ title: 'Resume', icon: 'i-carbon-document', href: '#resume' }
 ];
 

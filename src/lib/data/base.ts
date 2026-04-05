@@ -1,6 +1,6 @@
 const firstName = 'Iqbal';
 const lastName = 'Hidayat Rasyad';
-const suffix = 'My Portofolio Website';
+const suffix = 'Software Engineer';
 
 const BaseData = {
 	firstName,

@@ -84,3 +84,16 @@ export interface Education<S extends string = string> extends Item<S> {
 	subjects: Array<string>;
 	degree: string;
 }
+
+export interface BlogPost<S extends string = string> {
+	slug: S;
+	title: string;
+	description: string;
+	shortDescription: string;
+	publishedAt: Date;
+	category: string;
+	tags: Array<string>;
+	author: string;
+	readTime: number;
+	cover: Asset;
+}
