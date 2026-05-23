@@ -58,11 +58,12 @@ docker-compose down
 docker-compose logs -f
 ```
 
-For complete deployment guide to VPS, see [deploy-guide.md](deploy-guide.md).
+For complete deployment guide to VPS, see [TUTORIAL-VPS-NAT-PUBLIC.md](TUTORIAL-VPS-NAT-PUBLIC.md).
 
 ## 📝 Customize
 
 Edit your portfolio data in:
+
 - `src/lib/data/home.ts` - Homepage content
 - `src/lib/data/projects.ts` - Projects
 - `src/lib/data/experience.ts` - Work experience
