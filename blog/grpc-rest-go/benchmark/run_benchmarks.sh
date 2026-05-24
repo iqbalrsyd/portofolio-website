@@ -78,6 +78,17 @@ elif [ "$1" == "v2-list" ]; then
     run_benchmark "v2_grpc_list_heavy_pooled.js" "gRPC List (Pooled)"
 elif [ "$1" == "v2-comparison" ]; then
     run_benchmark "v2_concurrent_comparison.js" "Concurrent Comparison"
+elif [ "$1" == "v2-streaming" ]; then
+    echo -e "${GREEN}Running v2 streaming benchmarks...${NC}\n"
+    run_benchmark "v2_rest_bulk.js" "REST Bulk Fetch"
+    run_benchmark "v2_grpc_streaming.js" "gRPC Server Streaming"
+    run_benchmark "v2_streaming_comparison.js" "Direct Streaming Comparison"
+elif [ "$1" == "v2-bulk" ]; then
+    run_benchmark "v2_rest_bulk.js" "REST Bulk Fetch"
+elif [ "$1" == "v2-stream" ]; then
+    run_benchmark "v2_grpc_streaming.js" "gRPC Server Streaming"
+elif [ "$1" == "v2-stream-compare" ]; then
+    run_benchmark "v2_streaming_comparison.js" "Streaming Comparison"
 elif [ "$1" == "rest-small" ]; then
     run_benchmark "rest_small_payload.js" "REST Small Payload"
 elif [ "$1" == "rest-large" ]; then
@@ -100,6 +111,10 @@ else
     echo "    v2-single         - Single-item comparison (REST vs gRPC pooled)"
     echo "    v2-list           - List comparison (REST vs gRPC pooled)"
     echo "    v2-comparison     - Concurrent request comparison"
+    echo "    v2-streaming      - Streaming comparison (REST bulk vs gRPC stream)"
+    echo "    v2-bulk           - REST bulk fetch only"
+    echo "    v2-stream         - gRPC streaming only"
+    echo "    v2-stream-compare - Direct streaming vs bulk comparison"
     echo ""
     echo "  ORIGINAL BENCHMARKS:"
     echo "    rest-small        - REST API with small payloads"

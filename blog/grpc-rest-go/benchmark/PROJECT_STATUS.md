@@ -92,25 +92,52 @@
 
 ---
 
+## Completed Tasks (Continued)
+
+### STEP 7: Improved Benchmark Methodology ✅
+
+_(See STEP 2 for load stage details)_
+
 ## Pending Tasks 🔄
 
-### STEP 4: Streaming Benchmarks ⏳
+### STEP 4: Streaming Benchmarks ✅
 
-**Goal:** Measure gRPC streaming advantage
+**Goal:** Measure gRPC streaming advantage vs REST bulk fetch
 
-**Plan:**
+**Implementation:**
 
-- Implement `StreamProducts` benchmark using server-streaming
-- Compare against REST polling approach
-- Measure: throughput, latency, resource efficiency
-- Expected: gRPC streaming much more efficient for bulk operations
+- ✅ `v2_grpc_streaming.js` - gRPC server streaming test (1000 products)
+- ✅ `v2_rest_bulk.js` - REST bulk fetch (simulates streaming over REST)
+- ✅ `v2_streaming_comparison.js` - Side-by-side comparison
+- ✅ `STREAMING_GUIDE.md` - Comprehensive streaming documentation
 
-**Estimated effort:** 2-3 hours
+**Key metrics added:**
 
-**Files to create:**
+- `grpc_stream_latency_ms` - Server streaming latency
+- `grpc_stream_messages` - Message count tracking
+- `rest_bulk_latency_ms` - Bulk fetch latency
+- `rest_bulk_ttfb_ms` - Time to first byte
+- `rest_bulk_payload_bytes` - Payload size monitoring
 
-- `v2_grpc_streaming.js` - gRPC server streaming test
-- `v2_rest_polling.js` - REST simulated streaming (polling)
+**Load patterns:** 10 VUs → 50 VUs → 100 VUs (same as other v2 benchmarks)
+
+**Expected results:**
+
+- REST bulk: 50-60ms @ 10 VUs, 300-500ms @ 100 VUs
+- gRPC stream: 45-55ms @ 10 VUs, 100-150ms @ 100 VUs
+- gRPC advantage grows with concurrency due to multiplexing
+- gRPC memory efficiency and connection reuse visible
+
+**Run commands:**
+
+```bash
+./benchmark/run_benchmarks.sh v2-streaming    # All streaming tests
+./benchmark/run_benchmarks.sh v2-bulk         # REST bulk only
+./benchmark/run_benchmarks.sh v2-stream       # gRPC streaming only
+./benchmark/run_benchmarks.sh v2-stream-compare # Side-by-side
+```
+
+**Document:** `STREAMING_GUIDE.md` - Detailed streaming analysis
 
 ### STEP 5: Docker Networking ⏳
 
@@ -296,8 +323,12 @@ go run ./cmd/grpc/main.go &
 ✅ `v2_rest_list_heavy.js` - List operation REST
 ✅ `v2_grpc_list_heavy_pooled.js` - List operation gRPC pooled
 ✅ `v2_concurrent_comparison.js` - Mixed concurrent workload
+✅ `v2_grpc_streaming.js` - gRPC server streaming benchmark
+✅ `v2_rest_bulk.js` - REST bulk fetch benchmark
+✅ `v2_streaming_comparison.js` - Direct streaming vs bulk comparison
 ✅ `IMPROVEMENTS_v2.md` - Detailed analysis
 ✅ `QUICKSTART_v2.md` - User guide
+✅ `STREAMING_GUIDE.md` - Streaming benchmarks guide
 ✅ `PROJECT_STATUS.md` - This document
 
 ### Modified
