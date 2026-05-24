@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package product;
+
+option go_package = "github.com/iqbalrasyad/grpc-rest-go/proto/pb";
+
+import "product.proto";
+
+// ProductService provides product management operations
+service ProductService {
+  // CreateProduct creates a new product
+  rpc CreateProduct(CreateProductRequest) returns (Product);
+
+  // GetProduct retrieves a product by ID
+  rpc GetProduct(GetProductRequest) returns (Product);
+
+  // ListProducts returns all products
+  rpc ListProducts(ListProductsRequest) returns (ListProductsResponse);
+
+  // UpdateProduct updates an existing product
+  rpc UpdateProduct(UpdateProductRequest) returns (Product);
+
+  // DeleteProduct deletes a product
+  rpc DeleteProduct(DeleteProductRequest) returns (DeleteProductResponse);
+
+  // StreamProducts returns products as a stream
+  rpc StreamProducts(ListProductsRequest) returns (stream Product);
+}
