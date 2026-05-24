@@ -139,30 +139,72 @@ _(See STEP 2 for load stage details)_
 
 **Document:** `STREAMING_GUIDE.md` - Detailed streaming analysis
 
-### STEP 5: Docker Networking ⏳
+### STEP 5: Docker Networking ✅
 
 **Goal:** Remove localhost pathology, expose real transport effects
 
-**Plan:**
+**Implementation:**
 
-- Create docker-compose.yml with separate containers
-- Isolate benchmark runner in different container
-- Add configurable network latency (if needed)
-- Measure real inter-container communication
+✅ **Docker Infrastructure (Already Existed)**
 
-**Estimated effort:** 3-4 hours
+- Multi-stage Dockerfile with REST and gRPC targets
+- docker-compose.yml with bridge networking
+- Health checks for both services
+- Proper port exposure and networking
 
-**Improvements expected:**
+✅ **Documentation**
 
-- Transport overhead visible (would be hidden on localhost)
-- TCP segment bundling matters
-- Connection establishment time visible
-- More realistic performance picture
+- `DOCKER_BENCHMARKING.md` - Comprehensive guide (2000+ lines)
+  - Why Docker matters for benchmarking
+  - Step-by-step getting started
+  - Expected differences: localhost vs Docker
+  - Performance tuning options
+  - Troubleshooting guide
 
-**Why important:**
+✅ **Helper Scripts**
 
-- Localhost: <1ms latency (noise dominates)
-- Real service: 1-50ms latency (protocol differences matter)
+- `docker_benchmark.sh` - Simplified Docker operations
+  - Start/stop/restart services
+  - Health checks
+  - Easy benchmark running
+  - Logging and status commands
+- `compare_benchmarks.sh` - Localhost vs Docker comparison
+  - Automates full comparison workflow
+  - Runs same benchmark on both environments
+  - Saves results with timestamps
+  - Generates comparison summary
+
+✅ **Key Capabilities**
+
+- Run benchmarks against Docker containers
+- Compare localhost vs Docker results
+- Build and manage Docker images
+- Health checks and service management
+- Resource monitoring (docker stats)
+- Log viewing and debugging
+
+**Usage:**
+
+```bash
+# Simple helper script
+./docker_benchmark.sh start          # Start services
+./docker_benchmark.sh bench-single   # Run benchmark
+./docker_benchmark.sh logs           # View logs
+./docker_benchmark.sh stop           # Stop services
+
+# Full comparison
+./compare_benchmarks.sh v2-single    # Run on both localhost and Docker
+```
+
+**Expected Docker vs Localhost Differences:**
+
+- Latency increases uniformly (~2-3ms added)
+- gRPC advantage margin similar or grows
+- Tail latencies show network effects
+- Throughput may decrease at high concurrency
+- Both show same architectural patterns
+
+**Document:** `DOCKER_BENCHMARKING.md` - Complete Docker guide
 
 ### STEP 6: Resource Metrics & Observability ⏳
 
@@ -329,6 +371,9 @@ go run ./cmd/grpc/main.go &
 ✅ `IMPROVEMENTS_v2.md` - Detailed analysis
 ✅ `QUICKSTART_v2.md` - User guide
 ✅ `STREAMING_GUIDE.md` - Streaming benchmarks guide
+✅ `DOCKER_BENCHMARKING.md` - Docker networking guide
+✅ `docker_benchmark.sh` - Helper script for Docker operations
+✅ `compare_benchmarks.sh` - Localhost vs Docker comparison script
 ✅ `PROJECT_STATUS.md` - This document
 
 ### Modified
