@@ -61,6 +61,23 @@ if [ "$1" == "" ] || [ "$1" == "all" ]; then
     run_benchmark "grpc_large_payload.js" "gRPC Large Payload"
     run_benchmark "concurrent_traffic.js" "Concurrent Traffic"
     run_benchmark "stress_test.js" "Stress Test"
+elif [ "$1" == "v2" ]; then
+    echo -e "${GREEN}Running improved v2 benchmarks (recommended)...${NC}\n"
+    run_benchmark "v2_rest_lightweight.js" "v2: REST Single Item (Improved)"
+    run_benchmark "v2_grpc_lightweight_pooled.js" "v2: gRPC Single Item (Improved, Pooled)"
+    run_benchmark "v2_rest_list_heavy.js" "v2: REST List (Heavy Payload)"
+    run_benchmark "v2_grpc_list_heavy_pooled.js" "v2: gRPC List (Heavy Payload, Pooled)"
+    run_benchmark "v2_concurrent_comparison.js" "v2: Concurrent Comparison"
+elif [ "$1" == "v2-single" ]; then
+    echo -e "${GREEN}Running v2 single-item comparison...${NC}\n"
+    run_benchmark "v2_rest_lightweight.js" "REST Single Item"
+    run_benchmark "v2_grpc_lightweight_pooled.js" "gRPC Single Item (Pooled)"
+elif [ "$1" == "v2-list" ]; then
+    echo -e "${GREEN}Running v2 list comparison...${NC}\n"
+    run_benchmark "v2_rest_list_heavy.js" "REST List"
+    run_benchmark "v2_grpc_list_heavy_pooled.js" "gRPC List (Pooled)"
+elif [ "$1" == "v2-comparison" ]; then
+    run_benchmark "v2_concurrent_comparison.js" "Concurrent Comparison"
 elif [ "$1" == "rest-small" ]; then
     run_benchmark "rest_small_payload.js" "REST Small Payload"
 elif [ "$1" == "rest-large" ]; then
@@ -77,13 +94,21 @@ else
     echo -e "${RED}Unknown benchmark: $1${NC}"
     echo ""
     echo "Available benchmarks:"
-    echo "  rest-small      - REST API with small payloads"
-    echo "  rest-large      - REST API with large payloads (1000 items)"
-    echo "  grpc-small      - gRPC with small payloads"
-    echo "  grpc-large      - gRPC with large payloads (1000 items)"
-    echo "  concurrent      - Concurrent REST and gRPC traffic"
-    echo "  stress          - High-load stress test"
-    echo "  all             - Run all benchmarks (default)"
+    echo ""
+    echo "  IMPROVED v2 BENCHMARKS (Recommended):"
+    echo "    v2                - Run all improved benchmarks"
+    echo "    v2-single         - Single-item comparison (REST vs gRPC pooled)"
+    echo "    v2-list           - List comparison (REST vs gRPC pooled)"
+    echo "    v2-comparison     - Concurrent request comparison"
+    echo ""
+    echo "  ORIGINAL BENCHMARKS:"
+    echo "    rest-small        - REST API with small payloads"
+    echo "    rest-large        - REST API with large payloads (1000 items)"
+    echo "    grpc-small        - gRPC with small payloads"
+    echo "    grpc-large        - gRPC with large payloads (1000 items)"
+    echo "    concurrent        - Concurrent REST and gRPC traffic"
+    echo "    stress            - High-load stress test"
+    echo "    all               - Run all original benchmarks"
     exit 1
 fi
 
