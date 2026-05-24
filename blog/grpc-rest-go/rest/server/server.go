@@ -125,10 +125,26 @@ func (s *Server) GetProduct(c *gin.Context) {
 		return
 	}
 
+	// Check if simplified product is requested (for lightweight benchmarks)
+	// Default to lightweight (5 fields) to match gRPC proto definition
+	includeDetails := c.DefaultQuery("include_details", "false") == "true"
+
 	product, err := s.repo.GetByID(id)
 	if err != nil {
 		c.JSON(http.StatusNotFound, gin.H{
 			"error": err.Error(),
+		})
+		return
+	}
+
+	// If lightweight response requested, return only basic fields
+	if !includeDetails {
+		c.JSON(http.StatusOK, gin.H{
+			"id":          product.ID,
+			"name":        product.Name,
+			"description": product.Description,
+			"price":       product.Price,
+			"stock":       product.Stock,
 		})
 		return
 	}
@@ -138,7 +154,40 @@ func (s *Server) GetProduct(c *gin.Context) {
 
 // ListProducts returns all products
 func (s *Server) ListProducts(c *gin.Context) {
+	// Check if simplified products are requested (for lightweight benchmarks)
+	// Default to lightweight (5 fields) to match gRPC proto definition
+	includeDetails := c.DefaultQuery("include_details", "false") == "true"
+
 	products := s.repo.List()
+
+	if !includeDetails {
+		// Return lightweight response with only basic fields
+		type SimpleProduct struct {
+			ID          int32   `json:"id"`
+			Name        string  `json:"name"`
+			Description string  `json:"description"`
+			Price       float32 `json:"price"`
+			Stock       int32   `json:"stock"`
+		}
+
+		simplified := make([]SimpleProduct, len(products))
+		for i, p := range products {
+			simplified[i] = SimpleProduct{
+				ID:          p.ID,
+				Name:        p.Name,
+				Description: p.Description,
+				Price:       p.Price,
+				Stock:       p.Stock,
+			}
+		}
+
+		c.JSON(http.StatusOK, gin.H{
+			"products": simplified,
+			"count":    len(simplified),
+		})
+		return
+	}
+
 	c.JSON(http.StatusOK, gin.H{
 		"products": products,
 		"count":    len(products),
