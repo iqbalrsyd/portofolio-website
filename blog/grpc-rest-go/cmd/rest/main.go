@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"flag"
 	"log"
 	"os"
 	"os/signal"
@@ -13,6 +14,19 @@ import (
 )
 
 func main() {
+	// Get port from flag or environment variable
+	port := flag.String("port", ":8080", "Port to listen on (e.g., :8080, :9090)")
+	flag.Parse()
+
+	// Allow override via environment variable
+	if envPort := os.Getenv("REST_PORT"); envPort != "" {
+		if envPort[0] != ':' {
+			*port = ":" + envPort
+		} else {
+			*port = envPort
+		}
+	}
+
 	// Initialize repository
 	repo := storage.New()
 	log.Printf("Repository initialized with %d products", repo.Count())
@@ -25,7 +39,7 @@ func main() {
 
 	// Start server in a goroutine
 	go func() {
-		errChan <- restServer.Start(":8080")
+		errChan <- restServer.Start(*port)
 	}()
 
 	// Wait for either an error or interrupt signal

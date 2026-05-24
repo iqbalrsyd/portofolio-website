@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"log"
 	"os"
 	"os/signal"
@@ -11,6 +12,19 @@ import (
 )
 
 func main() {
+	// Get port from flag or environment variable
+	port := flag.String("port", ":50051", "Port to listen on (e.g., :50051, :50052)")
+	flag.Parse()
+
+	// Allow override via environment variable
+	if envPort := os.Getenv("GRPC_PORT"); envPort != "" {
+		if envPort[0] != ':' {
+			*port = ":" + envPort
+		} else {
+			*port = envPort
+		}
+	}
+
 	// Initialize repository
 	repo := storage.New()
 	log.Printf("Repository initialized with %d products", repo.Count())
@@ -23,7 +37,7 @@ func main() {
 
 	// Start server in a goroutine
 	go func() {
-		errChan <- grpcServer.Start(":50051")
+		errChan <- grpcServer.Start(*port)
 	}()
 
 	// Wait for either an error or interrupt signal
