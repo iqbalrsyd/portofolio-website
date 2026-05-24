@@ -20,27 +20,34 @@ func main() {
 	// Create REST server
 	restServer := server.New(repo)
 
+	// Channel to handle errors from goroutine
+	errChan := make(chan error, 1)
+
 	// Start server in a goroutine
 	go func() {
-		if err := restServer.Start(":8080"); err != nil {
-			log.Printf("Server error: %v", err)
-		}
+		errChan <- restServer.Start(":8080")
 	}()
 
-	// Wait for interrupt signal
+	// Wait for either an error or interrupt signal
 	sigChan := make(chan os.Signal, 1)
 	signal.Notify(sigChan, syscall.SIGINT, syscall.SIGTERM)
-	<-sigChan
 
-	log.Println("Shutdown signal received, gracefully shutting down...")
+	select {
+	case err := <-errChan:
+		if err != nil {
+			log.Fatalf("Server failed to start: %v", err)
+		}
+	case <-sigChan:
+		log.Println("Shutdown signal received, gracefully shutting down...")
 
-	// Graceful shutdown with timeout
-	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
-	defer cancel()
+		// Graceful shutdown with timeout
+		ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+		defer cancel()
 
-	if err := restServer.Shutdown(ctx); err != nil {
-		log.Printf("Shutdown error: %v", err)
+		if err := restServer.Shutdown(ctx); err != nil {
+			log.Printf("Shutdown error: %v", err)
+		}
+
+		log.Println("REST server stopped")
 	}
-
-	log.Println("REST server stopped")
 }
