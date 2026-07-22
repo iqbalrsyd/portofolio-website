@@ -1,0 +1,13 @@
+service,variant,startup_ms,rss_kb
+user-service,single,1516,20080
+user-service,multi-alpine,1313,6907
+user-service,distroless,1694,18165
+user-service,distroless-static,1306,19056
+order-service,single,1502,19845
+order-service,multi-alpine,1415,7128
+order-service,distroless,1340,19589
+order-service,distroless-static,1797,19793
+notification-service,single,1480,15267
+notification-service,multi-alpine,1315,9419
+notification-service,distroless,972,13312
+notification-service,distroless-static,1013,14448

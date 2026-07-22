@@ -193,31 +193,37 @@ Checkpoint: All five `/healthz` return 200; an order is created.
 
 **Goal:** Produce 4 Docker image variants per service and compare them.
 
-### 3.1 Variants in `docker/<service>/`
+### 3.1 Variants in `docker/variants/`
 
-| Variant      | Tag suffix    | Base image                                  |
-| ------------ | ------------- | ------------------------------------------- |
-| Single-stage | `-single`     | `golang:1.22`                               |
-| Multi-stage  | `-multi`      | `golang:1.22` -> `alpine`                   |
-| Alpine       | `-alpine`     | `golang:1.22-alpine` -> `alpine`            |
-| Distroless   | `-distroless` | `golang:1.22` -> `gcr.io/distroless/static` |
+| Variant            | Tag suffix          | Base image                                         |
+| ------------------ | ------------------- | -------------------------------------------------- |
+| Single-stage       | `single`            | `golang:1.22`                                      |
+| Multi-stage Alpine | `multi-alpine`      | `golang:1.22` -> `alpine:3.20`                     |
+| Distroless (glibc) | `distroless`        | `golang:1.22` -> `gcr.io/distroless/base-debian12` |
+| Distroless Static  | `distroless-static` | `golang:1.22` -> `gcr.io/distroless/static`        |
 
 ### 3.2 Build & measure
 
 ```bash
-./scripts/build-images.sh
-./scripts/measure-images.sh > benchmarks/docker-image-sizes.csv
+bash scripts/build-images.sh       # builds 20 images (5 services x 4 variants)
+bash scripts/measure-images.sh     # boots each, records startup + RSS
+bash scripts/experiments/exp01-images.sh  # the all-in-one experiment runner
 ```
 
-### 3.3 Smoke test (container)
+Outputs land in `benchmarks/exp01/`:
+
+- `build-summary.csv` — build_ms, size_bytes per image
+- `runtime-summary.csv` — startup_ms, rss_kb per image
+- `all.csv` — merged view
+- `results.md` — analysis
+
+### 3.3 Smoke test (all 12 variants)
 
 ```bash
-docker run --rm -p 8081:8080 --network host \
-  lab/user-service:multi /app/server
-curl -s http://localhost:8081/healthz
+bash scripts/smoke-images.sh
 ```
 
-Checkpoint: All image variants exist; sizes recorded in `benchmarks/`.
+Checkpoint: 12 / 12 images respond to `/healthz`; `all.csv` and `results.md` populated.
 
 ---
 
