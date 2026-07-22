@@ -1,0 +1,72 @@
+# =====================================================
+# Backend Performance Lab — root Docker Compose
+# Stage 1: Postgres + Redis for local development
+# Later stages will add the Go services.
+# =====================================================
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: lab-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-lab}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-labpass}
+      POSTGRES_DB: ${POSTGRES_DB:-labdb}
+    ports:
+      - '${POSTGRES_PORT:-5432}:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./configs/postgres/init.sql:/docker-entrypoint-initdb.d/01-init.sql:ro
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U ${POSTGRES_USER:-lab} -d ${POSTGRES_DB:-labdb}']
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    networks:
+      - lab-net
+    # Resource caps — used by Stage 7 Experiment 2
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 512M
+
+  redis:
+    image: redis:7-alpine
+    container_name: lab-redis
+    restart: unless-stopped
+    command:
+      [
+        'redis-server',
+        '--appendonly',
+        'yes',
+        '--maxmemory',
+        '256mb',
+        '--maxmemory-policy',
+        'allkeys-lru'
+      ]
+    ports:
+      - '${REDIS_PORT:-6379}:6379'
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    networks:
+      - lab-net
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 256M
+
+volumes:
+  postgres_data:
+  redis_data:
+
+networks:
+  lab-net:
+    driver: bridge
