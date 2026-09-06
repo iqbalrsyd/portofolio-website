@@ -8,6 +8,7 @@ node_modules
 .svelte-kit/
 dist/
 dist-ssr/
+/blog/
 
 # OS
 .DS_Store

@@ -77,6 +77,9 @@ const Assets = {
 	Airflow: asset('airflow.svg'),
 	MQTT: asset('mqtt.svg'),
 	Figma: asset('figma.svg'),
+	MAN4Jakarta: asset('man4jakarta.png.png'),
+	UGM: asset('ugm.jpg'),
+	BRIInsurance: asset('bri-insurance.png'),
 	Dotnet: asset('dotnet.svg'),
 	PHP: asset('php.svg')
 };

@@ -7,6 +7,9 @@ import devopsObservabilityMd from './md/devops-observability.md?raw';
 import etlAirflowMd from './md/etl-airflow.md?raw';
 import smartVillageKknMd from './md/smart-village-kkn.md?raw';
 import chatBackendRedisMd from './md/chat-backend-redis.md?raw';
+import whatsappReminderBotMd from './md/whatsapp-reminder-bot.md?raw';
+import culturalGuideAppMd from './md/cultural-guide-app.md?raw';
+import iotMonitoringCapstoneMd from './md/iot-monitoring-capstone.md?raw';
 
 const items: Array<Project> = [
 	{
@@ -21,7 +24,7 @@ const items: Array<Project> = [
 			from: new Date(2024, 8, 1)
 		},
 		skills: getSkills('docker', 'kubernetes', 'jenkins', 'golang', 'python'),
-		type: 'Undergraduate Thesis',
+		type: 'Undergraduate Thesis'
 	},
 	{
 		slug: 'event-driven-kafka',
@@ -36,7 +39,7 @@ const items: Array<Project> = [
 			to: new Date(2024, 6, 30)
 		},
 		skills: getSkills('golang', 'kafka', 'docker', 'postgresql'),
-		type: 'Microservices Backend',
+		type: 'Microservices Backend'
 	},
 	{
 		slug: 'devops-observability',
@@ -51,7 +54,7 @@ const items: Array<Project> = [
 			to: new Date(2024, 5, 30)
 		},
 		skills: getSkills('jenkins', 'prometheus', 'grafana', 'docker', 'kubernetes'),
-		type: 'DevOps Infrastructure',
+		type: 'DevOps Infrastructure'
 	},
 	{
 		slug: 'etl-airflow',
@@ -66,7 +69,7 @@ const items: Array<Project> = [
 			to: new Date(2024, 3, 30)
 		},
 		skills: getSkills('python', 'airflow', 'postgresql', 'docker'),
-		type: 'Data Pipeline',
+		type: 'Data Pipeline'
 	},
 	{
 		slug: 'smart-village-kkn',
@@ -81,18 +84,12 @@ const items: Array<Project> = [
 			to: new Date(2025, 1, 10)
 		},
 		skills: getSkills('reactjs', 'expressjs', 'mqtt', 'javascript', 'typescript'),
-		type: 'Community Service Project',
+		type: 'Community Service Project'
 	},
 	{
 		slug: 'whatsapp-reminder-bot',
 		color: '#25D366',
-		description: `Developed chatbot service in Golang to send scheduled reminders via WhatsApp and Telegram.
-
-Implemented message handlers, scheduling logic using cron jobs, and external API integration.
-
-Focused on backend automation and reliable message delivery with error handling and retry mechanisms.
-
-Used WAHA (WhatsApp HTTP API) for seamless integration with messaging platforms.`,
+		description: whatsappReminderBotMd,
 		shortDescription: 'WhatsApp/Telegram reminder chatbot service in Go',
 		links: [],
 		logo: Assets.Go,
@@ -102,7 +99,7 @@ Used WAHA (WhatsApp HTTP API) for seamless integration with messaging platforms.
 			to: new Date(2024, 2, 28)
 		},
 		skills: getSkills('golang'),
-		type: 'Automation Service',
+		type: 'Automation Service'
 	},
 	{
 		slug: 'chat-backend-redis',
@@ -118,18 +115,12 @@ Used WAHA (WhatsApp HTTP API) for seamless integration with messaging platforms.
 			to: new Date(2024, 1, 28)
 		},
 		skills: getSkills('golang', 'redis'),
-		type: 'Backend Service',
+		type: 'Backend Service'
 	},
 	{
 		slug: 'cultural-guide-app',
 		color: '#3DDC84',
-		description: `Developed Android application featuring interactive maps and location-based navigation for Prambanan Temple.
-
-Implemented geofencing logic to trigger contextual cultural content based on user proximity to specific areas.
-
-Integrated Firebase for user authentication, cloud data storage, and real-time synchronization.
-
-Supported offline data access to improve user experience in areas with limited connectivity.`,
+		description: culturalGuideAppMd,
 		shortDescription: 'Cultural guide mobile app with geofencing and offline support',
 		links: [],
 		logo: Assets.Android,
@@ -139,20 +130,12 @@ Supported offline data access to improve user experience in areas with limited c
 			to: new Date(2023, 11, 30)
 		},
 		skills: getSkills('java', 'firebase', 'android'),
-		type: 'Mobile Application',
+		type: 'Mobile Application'
 	},
 	{
 		slug: 'iot-monitoring-capstone',
 		color: '#660099',
-		description: `Designed MQTT-based communication protocol for real-time data exchange between IoT devices and backend services.
-
-Implemented data publishing and subscription flows using MQTT for sensor monitoring and system status tracking.
-
-Developed web-based dashboard using React to visualize real-time and historical IoT sensor data.
-
-Built backend services using Express.js to process MQTT messages and expose REST APIs for data access.
-
-Integrated MQTT data flow with web applications to support comprehensive monitoring and analysis use cases.`,
+		description: iotMonitoringCapstoneMd,
 		shortDescription: 'IoT monitoring system with MQTT and web dashboard',
 		links: [],
 		logo: Assets.MQTT,
@@ -162,7 +145,7 @@ Integrated MQTT data flow with web applications to support comprehensive monitor
 			to: new Date(2023, 11, 30)
 		},
 		skills: getSkills('mqtt', 'reactjs', 'expressjs', 'javascript', 'typescript'),
-		type: 'Capstone Project',
+		type: 'Capstone Project'
 	}
 ];
 

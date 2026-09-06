@@ -18,7 +18,7 @@ const items: Array<Experience> = [
 		name: 'Software Developer Intern',
 		color: 'blue',
 		links: [],
-		logo: Assets.Unknown,
+		logo: Assets.BRIInsurance,
 		shortDescription: 'Developed backend REST APIs using C# (.NET) and PHP, implemented frontend features using Angular.'
 	},
 	{
