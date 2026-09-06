@@ -3,12 +3,12 @@ node_modules
 # Output
 .output
 .vercel
-/.svelte-kit
-/build
-.svelte-kit/
+/.svelte-kit/
+/build/
 dist/
 dist-ssr/
 /blog/
+/scripts/legacy-vps/
 
 # OS
 .DS_Store
@@ -43,10 +43,9 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-# Package manager
+# Lockfiles from package managers not used by this npm project
 pnpm-lock.yaml
 yarn.lock
-package-lock.json
 
 # Test coverage
 coverage/

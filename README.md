@@ -58,7 +58,7 @@ docker-compose down
 docker-compose logs -f
 ```
 
-For complete deployment guide to VPS, see [TUTORIAL-VPS-NAT-PUBLIC.md](TUTORIAL-VPS-NAT-PUBLIC.md).
+For the complete VPS deployment guide, see [TUTORIAL-VPS-NAT-PUBLIC.md](docs/TUTORIAL-VPS-NAT-PUBLIC.md).
 
 ## 📝 Customize
 
