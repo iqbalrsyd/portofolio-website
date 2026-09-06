@@ -1,1 +1,0 @@
-import"./D4zyzPni.js";import{i as o}from"./DNKjRy7b.js";import{p as r,a as s,k as p,$ as m,h as e,i as f}from"./QQqPebFH.js";import{i as l,B as i}from"./BpGMRW0G.js";import{p as n}from"./C_4oelgL.js";function k(c,t){r(t,!1);let a=n(t,"title",8,"Title");o(),l("itotmv",d=>{p(()=>{m.title=(e(a()),e(i),f(()=>`${a()} | ${i.suffix}`)??"")})}),s()}export{k as T};
