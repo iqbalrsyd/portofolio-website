@@ -1,10 +1,14 @@
 <script lang="ts">
+	import { dev } from '$app/environment';
 	import NavBar from '$lib/components/common/nav-bar/nav-bar.svelte';
+	import { inject } from '@vercel/analytics';
 	import { onMount } from 'svelte';
 	import 'virtual:uno.css';
 	import '../app.css';
 	import '../markdown.css';
 	import { ModeWatcher } from 'mode-watcher';
+
+	inject({ mode: dev ? 'development' : 'production' });
 
 	let { children } = $props();
 
