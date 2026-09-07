@@ -20,6 +20,7 @@
 	import Experience from '$lib/landing/experience/+page.svelte';
 	import Skills from '$lib/landing/skills/+page.svelte';
 	import Projects from '$lib/landing/projects/+page.svelte';
+	import Blog from '$lib/landing/blog/+page.svelte';
 	import Resume from '$lib/landing/resume/+page.svelte';
 
 	let api: CarouselAPI;
@@ -99,7 +100,11 @@
 	<div id="projects" class="w-full pt-16">
 		<Projects />
 	</div>
-	
+
+	<div id="blog" class="w-full px-4 pt-16 sm:px-8">
+		<Blog />
+	</div>
+
 	<div id="resume" class="w-full pt-16">
 		<Resume />
 	</div>
